@@ -14,10 +14,10 @@ def main():
     with conn:
         print(f"connected by {addr}")
         while True:
-            # data = conn.recv(1024)
-            # if not data:
-            #     break
-            conn.sendall("HTTP/1.1 200 OK\r\n\r\n")
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
 
 
 if __name__ == "__main__":

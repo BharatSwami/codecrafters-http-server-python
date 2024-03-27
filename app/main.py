@@ -67,13 +67,14 @@ def main():
 
     # Uncomment this to pass the first stage
     #
+    directory = ""
     if(sys.argv == 3 and sys.argv[1] == "--directory"):
         directory = sys.argv[2]
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     while True:
         conn, addr = server_socket.accept() # wait for client
         threading.Thread(
-            target=handle_response, args = [conn,addr,args.directory]
+            target=handle_response, args = [conn,addr,directory]
         ).start()
     
 

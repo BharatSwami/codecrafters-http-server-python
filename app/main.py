@@ -39,7 +39,7 @@ def handle_response(conn,addr,directory = " "):
                 absolute_filepath = os.path.join(directory,filename)
                 print(absolute_filepath)
                 
-                if os.path.exists(absolute_filepath):
+                if os.path.exists(absolute_filepath) and os.path.isfile(absolute_filepath):
                     try:
                         with open(absolute_filepath, 'rb') as f:
                             contents = f.read().decode()

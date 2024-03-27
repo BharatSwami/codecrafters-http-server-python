@@ -67,8 +67,8 @@ def main():
 
     # Uncomment this to pass the first stage
     #
-    if(sys.args == 3 and sys.args[1] == "--directory"):
-        directory = sys.args[2]
+    if(sys.argv == 3 and sys.argv[1] == "--directory"):
+        directory = sys.argv[2]
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     while True:
         conn, addr = server_socket.accept() # wait for client

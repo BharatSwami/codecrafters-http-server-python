@@ -38,14 +38,12 @@ def handle_response(conn,addr,directory = " "):
                 print(filename)
                 absolute_filepath = os.path.join(directory,filename)
                 print(absolute_filepath)
-                try:
+                if os.path.exists(absolute_filepath):
                     with open(absolute_filepath, 'r') as f:
                         contents = f.read()
-                        print(contents)
-                        response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
-                except IOError:
-                    print("Error: could not read file " + filename)
-                    
+                        print(type(contents))
+                        response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n{contents}"
+                else:  
                     response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
                 print(response_massage)
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":

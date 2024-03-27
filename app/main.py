@@ -49,7 +49,8 @@ def handle_response(conn,addr,directory = " "):
                     except Exception as e:
                         response_massage = "HTTP/1.1 404 Not Found\r\n"
                 else:  
-                    response_massage = "HTTP/1.1 404 Not Found\r\n\"
+                    response_massage = "HTTP/1.1 404 Not Found\r\n"
+                    #
                 
 
                 print(response_massage)

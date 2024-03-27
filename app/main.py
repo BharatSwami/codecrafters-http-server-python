@@ -47,9 +47,9 @@ def handle_response(conn,addr,directory = " "):
 
                             response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n{contents}"
                     except Exception as e:
-                        response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
+                        response_massage = "HTTP/1.1 404 Not Found\r\n"
                 else:  
-                    response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
+                    response_massage = "HTTP/1.1 404 Not Found\r\n\"
                 
 
                 print(response_massage)

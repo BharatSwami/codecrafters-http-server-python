@@ -25,7 +25,7 @@ def main():
                 if "echo/" in request_target:
                     random_string = request_target.split("echo/")[-1]
                     #print(request_target)
-                    response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(request_target)}\r\n\r\n{request_target}"
+                    response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
                     #print(response_massage)
                 elif request_target == "/user-agent":
                     user_agent = UserAgent.split(" ")[-1]

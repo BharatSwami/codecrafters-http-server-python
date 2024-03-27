@@ -20,10 +20,11 @@ def main():
                 break
             data_list = data.split("\n")[0].split(" ")
             print(data_list)
-            if data_list[1].startswith("/echo/"):
+            if "echo/" in data_list[1]:
                 random_string = data_list[1].split("echo")[-1]
                 print(random_string)
-                response_massage = f"HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\n\r\n\rContent-Length: {len(random_string)-1}\n\r\n\r{random_string[1:]}\n\r\n\r"
+                response_massage = f"HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\r\n\r\nContent-Length: {len(random_string)-1}r\n\r\n{random_string[1:]}r\n\r\n"
+                print(response_massage)
                 conn.sendall(response_massage.encode())
             elif data_list[1] == "/":
                 conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")

@@ -27,7 +27,7 @@ def main():
                     #print(request_target)
                     response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(request_target)}\r\n\r\n{request_target}"
                     #print(response_massage)
-                elif request_target = "/user-agent":
+                elif request_target == "/user-agent":
                     user_agent = UserAgent.split(" ")[-1]
                     response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent)}\r\n\r\n{user_agent}"
                 elif request_target == "/":

@@ -1,7 +1,13 @@
 # Uncomment this to pass the first stage
 import socket
 import threading
-def handle_response(conn,addr):
+import sys
+import os
+import argparse
+from pathlib import Path
+
+
+def handle_response(conn,addr,directory = " "):
     
 
     with conn:
@@ -29,11 +35,12 @@ def handle_response(conn,addr):
             elif "files/" in startline_list[1]:
                 filename = startline_list[1].split("/")[-1]
                 print(filename)
-                if filename in directory:
+                absolute_filepath = directory + "/" + filename
+                if os.path.isfile(absolute_filepath):
                     response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
                 else:
                     response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
-            
+                print(response_massage)
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":
                 #user_agent = UserAgent.split(" ")[-1]
                 user_agent = data_list[2].split("\r")[0].split(" ")[-1]
@@ -53,11 +60,15 @@ def main():
 
     # Uncomment this to pass the first stage
     #
+    parser = argparse.ArgumentParser(description="add a directory")
+    parser.add_argument('--directory', type=Path)
+    args = parser.parse_args()
+    print(args.directory)
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     while True:
         conn, addr = server_socket.accept() # wait for client
         threading.Thread(
-            target=handle_response, args = [conn,addr]
+            target=handle_response, args = [conn,addr,args.directory]
         ).start()
     
 

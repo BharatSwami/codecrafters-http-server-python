@@ -18,29 +18,33 @@ def main():
             #print(data)
             if not data:
                 break
-            startline, host, UserAgent = data.split("\n")
-            print(startline, host, UserAgent)
-            request_verb, request_target, http_version = startline.split(" ")
+            #startline, host, UserAgent = data.split("\n")
+            data_list = data.split("\n")
+            print(data_list)
+            #request_verb, request_target, http_version = startline.split(" ")
+            startline_list = data_list[0].split(" ")
             #if request_verb == "GET":
             response_massage = ""
-            
-            print(request_verb, request_target, http_version)
-            if "echo/" in request_target:
-                random_string = request_target.split("echo/")[-1]
+            print(startline_list)
+            #print(request_verb, request_target, http_version)
+            if "echo/" in startline_list[1]:#request_target:
+                #random_string = request_target.split("echo/")[-1]
+                random_string = startline_list[1].split("echo/")[-1]
                 #print(request_target)
                 response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
                 #print(response_massage)
-            elif request_target == "/user-agent":
-                user_agent = UserAgent.split(" ")[-1]
+            elif startline_list[1] == "/user-agent"#request_target == "/user-agent":
+                #user_agent = UserAgent.split(" ")[-1]
+                user_agent = data_list[2].split(" ")[-1]
                 response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent)}\r\n\r\n{user_agent}"
-            elif request_target == "/":
+            elif startline_list[1] == "/"#request_target == "/":
                 response_massage = "HTTP/1.1 200 OK\r\n\r\n"
             else:
                 response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
             #
             conn.sendall(response_massage.encode())
     
-    server_socket.close()
+        server_socket.close()
 
 if __name__ == "__main__":
     main()

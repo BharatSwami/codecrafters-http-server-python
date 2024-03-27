@@ -68,7 +68,7 @@ def main():
     # Uncomment this to pass the first stage
     #
     directory = ""
-    if(sys.argv == 3 and sys.argv[1] == "--directory"):
+    if(len(sys.argv) == 3 and sys.argv[1] == "--directory"):
         directory = sys.argv[2]
     print(directory)
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)

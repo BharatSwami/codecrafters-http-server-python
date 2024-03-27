@@ -43,7 +43,7 @@ def main():
             else:
                 response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
             #
-            conn.sendall(response_massage.encode())
+            conn.send(response_massage.encode())
         server_socket.close()
 
 if __name__ == "__main__":

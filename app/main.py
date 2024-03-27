@@ -5,6 +5,7 @@ import sys
 import os
 import argparse
 from pathlib import Path
+import pathlib
 
 
 def handle_response(conn,addr,directory = " "):
@@ -35,7 +36,7 @@ def handle_response(conn,addr,directory = " "):
             elif "files/" in startline_list[1]:
                 filename = startline_list[1].split("/")[-1]
                 print(filename)
-                absolute_filepath = directory + "/" + filename
+                absolute_filepath = posixpath.join(directory,filename)
                 print(absolute_filepath)
                 try:
                     with open(absolute_filepath, 'r') as f:

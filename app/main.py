@@ -12,12 +12,16 @@ def main():
     conn, addr = server_socket.accept() # wait for client
 
     with conn:
-        print(f"connected by {addr}")
+        #print(f"connected by {addr}")
         while True:
-            data = conn.recv(1024)
+            data = conn.recv(1024).decode()
             if not data:
                 break
-            conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
+            data_list = data.split(" ")
+            if data[1] == "/":
+                conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
+            else:
+                conn.sendall(b"HTTP/1.1 404 Not Found\r\n\r\n")
 
 
 if __name__ == "__main__":

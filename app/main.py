@@ -64,8 +64,7 @@ def handle_response(conn,addr,directory = " "):
                 response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
             #
             conn.send(response_massage.encode())
-        server_socket.close()
-
+        
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
     print("Logs from your program will appear here!")

@@ -36,7 +36,7 @@ def handle_response(conn,addr,directory = " "):
             elif "files/" in startline_list[1]:
                 filename = startline_list[1].split("/")[-1]
                 print(filename)
-                absolute_filepath = posixpath.join(directory,filename)
+                absolute_filepath = os.path.join(directory,filename)
                 print(absolute_filepath)
                 try:
                     with open(absolute_filepath, 'r') as f:
@@ -67,10 +67,8 @@ def main():
 
     # Uncomment this to pass the first stage
     #
-    parser = argparse.ArgumentParser(description="add a directory")
-    parser.add_argument('--directory', type=Path)
-    args = parser.parse_args()
-    print(type(args.directory))
+    if(sys.args == 3 and sys.args[1] == "--directory"):
+        directory = sys.args[2]
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     while True:
         conn, addr = server_socket.accept() # wait for client

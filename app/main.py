@@ -36,6 +36,7 @@ def handle_response(conn,addr,directory = " "):
                 filename = startline_list[1].split("/")[-1]
                 print(filename)
                 absolute_filepath = directory + "/" + filename
+                print(absolute_filepath)
                 if os.path.isfile(absolute_filepath):
                     response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
                 else:

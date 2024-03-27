@@ -69,7 +69,7 @@ def main():
     parser = argparse.ArgumentParser(description="add a directory")
     parser.add_argument('--directory', type=Path)
     args = parser.parse_args()
-    print(args.directory)
+    print(type(args.directory))
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     while True:
         conn, addr = server_socket.accept() # wait for client

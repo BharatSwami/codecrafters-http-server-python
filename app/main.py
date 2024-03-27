@@ -15,6 +15,7 @@ def main():
         print(f"connected by {addr}")
         while True:
             data = conn.recv(1024)
+            print(data)
             if not data:
                 break
             data_list = data.split("\n").split(" ")

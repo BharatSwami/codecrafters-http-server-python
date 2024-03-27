@@ -23,8 +23,8 @@ def main():
             if data_list[1].startswith("/echo/"):
                 random_string = data_list[1].split("echo")[-1]
                 print(random_string)
-                response_massage = f"HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\n\r\n\rContent-Length: 3\n\r\n\r\n{random_string}\n\r\n\r"
-                conn.sendall(response_massage.encode())
+                response_massage = f"HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\n\r\n\rContent-Length: 3\n\r\n\r\{random_string}\n\r\n\r"
+                conn.sendall(b"response_massage")
             elif data_list[1] == "/":
                 conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
             else:

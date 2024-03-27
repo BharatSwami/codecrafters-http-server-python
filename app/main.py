@@ -19,10 +19,11 @@ def main():
             if not data:
                 break
             startline, host, UserAgent = data.split("\n")
+            print(startline, host, UserAgent)
             request_verb, request_target, http_version = startline.split(" ")
             #if request_verb == "GET":
             response_massage = ""
-            print(startline, host, UserAgent)
+            
             print(request_verb, request_target, http_version)
             if "echo/" in request_target:
                 random_string = request_target.split("echo/")[-1]

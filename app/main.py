@@ -26,6 +26,14 @@ def handle_response(conn,addr):
                 #print(request_target)
                 response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
                 #print(response_massage)
+            elif "files/" in startline_list[1]:
+                filename = startline_list[1].split("/")[-1]
+                print(filename)
+                if filename in directory:
+                    response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
+                else:
+                    response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
+            
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":
                 #user_agent = UserAgent.split(" ")[-1]
                 user_agent = data_list[2].split("\r")[0].split(" ")[-1]

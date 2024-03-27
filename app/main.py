@@ -19,12 +19,12 @@ def handle_response(conn,addr,directory = " "):
                 break
             #startline, host, UserAgent = data.split("\n")
             data_list = data.split("\n")
-            print(data_list)
+            #print(data_list)
             #request_verb, request_target, http_version = startline.split(" ")
             startline_list = data_list[0].split(" ")
             #if request_verb == "GET":
             response_massage = ""
-            print(startline_list)
+            #print(startline_list)
             #print(request_verb, request_target, http_version)
             if "echo/" in startline_list[1]:    #request_target:
                 #random_string = request_target.split("echo/")[-1]
@@ -37,9 +37,14 @@ def handle_response(conn,addr,directory = " "):
                 print(filename)
                 absolute_filepath = directory + "/" + filename
                 print(absolute_filepath)
-                if os.path.isfile(absolute_filepath):
-                    response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
-                else:
+                try:
+                    with open(absolute_filepath, 'r') as f:
+                        contents = f.read()
+                        print(contents)
+                        response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(random_string)}\r\n\r\n{random_string}"
+                except IOError:
+                    print("Error: could not read file " + filename)
+                    
                     response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
                 print(response_massage)
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":

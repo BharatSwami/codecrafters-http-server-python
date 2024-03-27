@@ -12,13 +12,13 @@ def main():
     conn, addr = server_socket.accept() # wait for client
 
     with conn:
-        #print(f"connected by {addr}")
+        print(f"connected by {addr}")
         while True:
             data = conn.recv(1024)
             if not data:
                 break
             data_list = data.split("\n").split(" ")
-            print(data)
+            print(data_list)
             if data_list[1] == "/":
                 conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
             else:

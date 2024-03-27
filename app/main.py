@@ -14,11 +14,11 @@ def main():
     with conn:
         print(f"connected by {addr}")
         while True:
-            data = conn.recv(1024)
+            data = conn.recv(1024).decode()
             print(data)
             if not data:
                 break
-            data_list = data.split("\n").split(" ")
+            data_list = data.split("\n")[0].split(" ")
             print(data_list)
             if data_list[1] == "/":
                 conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")

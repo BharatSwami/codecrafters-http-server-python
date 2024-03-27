@@ -36,6 +36,7 @@ def main():
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":
                 #user_agent = UserAgent.split(" ")[-1]
                 user_agent = data_list[2].split("/r")[0].split(" ")[-1]
+                print(user_agent)
                 response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {len(user_agent)}\r\n\r\n{user_agent}"
             elif startline_list[1] == "/":   #request_target == "/":
                 response_massage = "HTTP/1.1 200 OK\r\n\r\n"

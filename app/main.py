@@ -42,7 +42,7 @@ def handle_response(conn,addr,directory = " "):
                 if os.path.exists(absolute_filepath):
                     try:
                         with open(absolute_filepath, 'rb') as f:
-                            contents = f.read()
+                            contents = f.read().decode()
                             #print(type(contents))
 
                             response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n" + contents

@@ -41,15 +41,15 @@ def handle_response(conn,addr,directory = " "):
                 
                 if os.path.exists(absolute_filepath):
                     try:
-                        with open(absolute_filepath, 'r') as f:
+                        with open(absolute_filepath, 'rb') as f:
                             contents = f.read()
                             #print(type(contents))
 
-                            response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n{contents}"
+                            response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n" + contents
                     except Exception as e:
-                        response_massage = "HTTP/1.1 404 Not Found\r\n"
+                        response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
                 else:  
-                    response_massage = "HTTP/1.1 404 Not Found\r\n"
+                    response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
                     #
                 
 

@@ -38,15 +38,21 @@ def handle_response(conn,addr,directory = " "):
                 print(filename)
                 absolute_filepath = os.path.join(directory,filename)
                 print(absolute_filepath)
+                
                 if os.path.exists(absolute_filepath):
-                    with open(absolute_filepath, 'r') as f:
-                        contents = f.read()
-                        #print(type(contents))
+                    try:
+                        with open(absolute_filepath, 'r') as f:
+                            contents = f.read()
+                            #print(type(contents))
 
-                        response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n{contents}"
+                            response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n{contents}"
+                    except Exception as e:
+                        response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
                 else:  
                     response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
-                #print(response_massage)
+                
+
+                print(response_massage)
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":
                 #user_agent = UserAgent.split(" ")[-1]
                 user_agent = data_list[2].split("\r")[0].split(" ")[-1]

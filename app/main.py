@@ -12,19 +12,26 @@ def main():
     conn, addr = server_socket.accept() # wait for client
 
     with conn:
-        print(f"connected by {addr}")
+        #print(f"connected by {addr}")
         while True:
             data = conn.recv(1024).decode()
-            print(data)
+            #print(data)
             if not data:
                 break
             data_list = data.split("\n")[0].split(" ")
             print(data_list)
-            if data_list[1] == "/":
+            if data_list[1].startswith("/echo/"):
+                random_string = data_list[1]/split("/")[-1]
+                print(random_string)
+                response_massage = f"HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\n\r\n\rContent-Length: 3\n\r\n\r\n{random_string}\n\r\n\r"
+                conn.sendall(response_massage.encode())
+            elif data_list[1] == "/":
                 conn.sendall(b"HTTP/1.1 200 OK\r\n\r\n")
             else:
                 conn.sendall(b"HTTP/1.1 404 Not Found\r\n\r\n")
-
+    
+    
+    server_socket.close()
 
 if __name__ == "__main__":
     main()

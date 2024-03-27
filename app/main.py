@@ -42,11 +42,11 @@ def handle_response(conn,addr,directory = " "):
                     with open(absolute_filepath, 'r') as f:
                         contents = f.read()
                         #print(type(contents))
-                        
+
                         response_massage = f"HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: {len(contents)}\r\n\r\n{contents}"
                 else:  
                     response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
-                print(response_massage)
+                #print(response_massage)
             elif startline_list[1] == "/user-agent":   #request_target == "/user-agent":
                 #user_agent = UserAgent.split(" ")[-1]
                 user_agent = data_list[2].split("\r")[0].split(" ")[-1]

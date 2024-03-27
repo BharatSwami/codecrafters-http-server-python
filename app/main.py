@@ -34,7 +34,7 @@ def main():
                     response_massage = "HTTP/1.1 200 OK\r\n\r\n"
                 else:
                     response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
-            
+            #
             conn.sendall(response_massage.encode())
     
     server_socket.close()

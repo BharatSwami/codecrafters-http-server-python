@@ -21,7 +21,7 @@ def main():
             data_list = data.split("\n")[0].split(" ")
             print(data_list)
             if data_list[1].startswith("/echo/"):
-                random_string = data_list[1]/split("/")[-1]
+                random_string = data_list[1].split("echo")[-1]
                 print(random_string)
                 response_massage = f"HTTP/1.1 200 OK\r\n\r\nContent-Type: text/plain\n\r\n\rContent-Length: 3\n\r\n\r\n{random_string}\n\r\n\r"
                 conn.sendall(response_massage.encode())

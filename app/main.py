@@ -64,6 +64,7 @@ def handle_response(conn,addr,directory = " "):
                 response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
             #
             conn.send(response_massage.encode())
+            conn.close()
         
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
@@ -81,7 +82,7 @@ def main():
         threading.Thread(
             target=handle_response, args = [conn,addr,directory]
         ).start()
-    server_socket.close()
+    
 
 if __name__ == "__main__":
     main()

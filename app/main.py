@@ -71,14 +71,14 @@ def handle_response(conn,addr,directory = " "):
                     absolute_filepath = os.path.join(directory,filename)
                     print(absolute_filepath)
                     
-                    if os.path.exists(absolute_filepath) and os.path.isfile(absolute_filepath):
-                            with open(absolute_filepath, 'w') as f:
-                                print(data_list[-1])
-                                f.write(data_list[-1])
-                                #print(type(contents))
+            
+                    with open(absolute_filepath, 'w') as f:
+                        print(data_list[-1])
+                        f.write(data_list[-1])
+                        #print(type(contents))
 
-                                response_massage = f"HTTP/1.1 201 Created\r\n\r\n"
-                                f.close()
+                        response_massage = f"HTTP/1.1 201 Created\r\n\r\n"
+                        f.close()
                     else:  
                         response_massage = "HTTP/1.1 404 Not Found\r\n\r\n"
                 conn.send(response_massage.encode())

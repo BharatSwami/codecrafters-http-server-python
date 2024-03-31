@@ -83,7 +83,7 @@ def main():
         threading.Thread(
             target=handle_response, args = [conn,addr,directory]
         ).start()
-    
+    server_socket.close()
 
 if __name__ == "__main__":
     main()
